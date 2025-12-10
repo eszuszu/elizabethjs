@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/svg+xml" href="/cocentric.svg" />
+    <link rel="stylesheet" href="./style.css" type="text/css"/>
+    <title>home | elizabethjs</title>
+    <script>(() => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) { 
+        document.documentElement.dataset.theme = savedTheme;
+      }
+    })()</script>
+  </head>
+  <body>
+    <app- id="app">
+      <header slot="header">
+        <nav class="container">
+          <ul>
+            <li><a href="/about/">about</a></li>
+            <li><a href="/case-studies/">case studies</a></li>
+            <li><a href="/contact/">contact</a></li>
+            <li><a href="/blog/">blog</a></li>
+          </ul>
+          <button type="button" class="theme-toggle">🔆</button>
+        </nav>
+      </header>
+      <main slot="page">
+        <hgroup>
+          <h2>
+            <span>Hello,</span><br>I'm Elizabeth, a design engineer and software developer, and really dig everything 3D.<br>I'm on a journey to study and contribute meaninful research to the field of computer science.<br>In doing so, I aim to make useful tools for humans and to help discover what's next on the web and in animation, games, and visualisations.
+          </h2>
+          <p class="hero">
+            To see what I'm all about, take a look at my <a href="/case-studies/">project case studies</a>.
+          </p>
+        </hgroup>
+        <section>
+          <h3>
+            Current Focus: <a href="https://github.com/eszuszu/imbui" target="_blank">imbui</a>
+          </h3>
+        </section>
+      </main>
+      <footer slot="footer">
+        <p>2025 | Elizabeth Schwartz</p>
+      </footer>
+    </app->
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

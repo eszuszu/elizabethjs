@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" type="image/svg+xml" href="/cocentric.svg" />
+  <link rel="stylesheet" href="/style.css" />
+  <title>case studies | elizabethjs</title>
+  <script>(() => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.dataset.theme = savedTheme;
+      }
+    })()</script>
+</head>
+
+<body>
+  <app- id="app">
+    <header slot="header">
+      <nav>
+        <ul>
+          <li><a href="/about/">about</a></li>
+          <li><a href="/case-studies/">case studies</a></li>
+          <li><a href="/contact/">contact</a></li>
+          <li><a href="/blog/">blog</a></li>
+        </ul>
+        <button type="button" class="theme-toggle">🔆</button>
+      </nav>
+    </header>
+    <main slot="page">
+      <h2>Case Studies</h2>
+      <h3>imbui</h3>
+      <h3>Codex Grove</h3>
+      <h3>svgvz</h3>
+      <h3>3D Topology and Deformation Studies</h3>
+    </main>
+    <footer slot="footer">
+      <p>2025 | Elizabeth Schwartz</p>
+    </footer>
+  </app->
+
+  <script type="module" src="../main.ts"></script>
+</body>
+
+</html>

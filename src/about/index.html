@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" type="image/svg+xml" href="/cocentric.svg" />
+  <link rel="stylesheet" href="/style.css" />
+  <title>about | elizabethjs</title>
+  <script>(() => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.dataset.theme = savedTheme;
+      }
+    })()</script>
+</head>
+
+<body>
+  <app- id="app">
+    <header slot="header">
+      <nav>
+        <ul>
+          <li><a href="/about/">about</a></li>
+          <li><a href="/case-studies/">case studies</a></li>
+          <li><a href="/contact/">contact</a></li>
+          <li><a href="/blog/">blog</a></li>
+        </ul>
+        <button type="button" class="theme-toggle">🔆</button>
+      </nav>
+    </header>
+    <main slot="page">
+      <h2>I'm a design engineer and developer currently working with TypeScript on front end tools</h2>
+      <p>I'm passionate about design, art, and music, and get a lot of inspiration from art and design history, architecture, and the innovative systems and styles that have emerged over time.</p>
+      <p>Some style movements that I resonate with are Art Nouveau, Impressionism and Expressionism, early printmaking as woodcuts and etchings, as well as abstract, surreal, and visionary art.</p>
+      <p>I'm always down with functional yet warm and open modernism, I also appreciate thoughtful typography, well designed grid layouts, and expressive letterforms.</p>
+      <p>If I'm not working, I like to draw and doodle out my thoughts, be out in nature, play the guitar, and spend time with my wife. I'm also into 3D modeling and sculpting, mostly using the software Blender.</p>
+      <p>My favorite music genres are jazz, indie, & groovy stuff. Sometimes heavier things too. I'm actually a huge music nerd but that will need to be expanded on later!</p>
+    </main>
+    <footer slot="footer">
+      <p>2025 | Elizabeth Schwartz</p>
+    </footer>
+  </app->
+
+  <script type="module" src="../main.ts"></script>
+</body>
+
+</html>
