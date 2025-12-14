@@ -19,15 +19,16 @@
 <body>
   <app- id="app">
     <header slot="header">
-      <nav>
+      <nav class="contracted">
         <ul>
           <li><a href="/about/">about</a></li>
           <li><a href="/case-studies/">case studies</a></li>
           <li><a href="/contact/">contact</a></li>
-          <li><a href="/blog/">blog</a></li>
+          <li class="current"><a href="/blog/">blog</a></li>
         </ul>
-        <button type="button" class="theme-toggle">🔆</button>
       </nav>
+      <button type="button" class="nav-toggle">⇣nav</button>
+      <button type="button" class="theme-toggle">🔆</button>
     </header>
     <main slot="page">
       <h2>
@@ -41,7 +42,7 @@
         </p>
     </main>
     <footer slot="footer">
-      <p>2025 | Elizabeth Schwartz</p>
+      <p>2025 | <a href="/">Elizabeth Schwartz</a></p>
     </footer>
   </app->
 

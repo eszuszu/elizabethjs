@@ -19,26 +19,29 @@
 <body>
   <app- id="app">
     <header slot="header">
-      <nav>
+      <nav class="contracted">
         <ul>
-          <li><a href="/about/">about</a></li>
+          <li class="current"><a href="/about/">about</a></li>
           <li><a href="/case-studies/">case studies</a></li>
           <li><a href="/contact/">contact</a></li>
           <li><a href="/blog/">blog</a></li>
         </ul>
-        <button type="button" class="theme-toggle">🔆</button>
       </nav>
+      <button type="button" class="nav-toggle">⇣nav</button>
+      <button type="button" class="theme-toggle">🔆</button>
     </header>
+
+    
     <main slot="page">
       <h2>I'm a design engineer and developer currently working with TypeScript on front end tools</h2>
       <p>I'm passionate about design, art, and music, and get a lot of inspiration from art and design history, architecture, and the innovative systems and styles that have emerged over time.</p>
-      <p>Some style movements that I resonate with are Art Nouveau, Impressionism and Expressionism, early printmaking as woodcuts and etchings, as well as abstract, surreal, and visionary art.</p>
+      <p>Some style movements that I resonate with are Art Nouveau, Impressionism and Expressionism, early printmaking such as woodcuts and etchings, as well as abstract, surreal, and visionary art.</p>
       <p>I'm always down with functional yet warm and open modernism, I also appreciate thoughtful typography, well designed grid layouts, and expressive letterforms.</p>
-      <p>If I'm not working, I like to draw and doodle out my thoughts, be out in nature, play the guitar, and spend time with my wife. I'm also into 3D modeling and sculpting, mostly using the software Blender.</p>
+      <p>If I'm not working, I like to sketch and draw from imagination, doodle/map out my thoughts, be out in nature, play the guitar, and spend time with my wife. I'm also into 3D modeling and sculpting, mostly using the software Blender. I love doing character art, the whole process from ideating and researching, to modeling and texturing. Painterly textures and stylistic renders are my favorite.</p>
       <p>My favorite music genres are jazz, indie, & groovy stuff. Sometimes heavier things too. I'm actually a huge music nerd but that will need to be expanded on later!</p>
     </main>
     <footer slot="footer">
-      <p>2025 | Elizabeth Schwartz</p>
+      <p>2025 | <a href="/">Elizabeth Schwartz</a></p>
     </footer>
   </app->
 

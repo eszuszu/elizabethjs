@@ -88,6 +88,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 
@@ -96,12 +97,14 @@
 }
 
 [slot="page"] {
+  grid-area: main;
   max-width: var(--bp-lg);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: var(--font-size-4xl) 0;
+  place-items: center;
+  padding: var(--font-size-6xl) 0;
+  z-index: 1;
 }
 
 hgroup span {
@@ -119,8 +122,16 @@ hgroup span {
   position: absolute;
   right: var(--padding-md);
   top: var(--padding-md);
+  pointer-events: all;
 }
 
+.nav-toggle {
+  top: var(--padding-md);
+  height: fit-content;
+  position: relative;
+  left: 64px;
+  pointer-events: all;
+}
 
 a {
   font-weight: 500;
@@ -159,52 +170,108 @@ p {
   color: var(--color-text-lt);
 }
 
-hgroup p {
-  text-align: center;
+hgroup {
+  height: 100%;
 }
 
 hgroup h2 {
-  text-align: center;
+  padding-top: var(--font-size-6xl);
 }
 
 #app {
   margin: 0;
-  display: block;
-  position: relative;
-  text-align: center;
+  z-index: 0;
+  display: grid;
+  grid-template-areas:
+    "main main main main main"
+    "main main main main main" 
+    "footer footer footer footer footer";
+  grid-template-columns: min-content auto auto auto min-content;
+  grid-template-rows: fit-content fit-content fit-content;
   min-width: 320px;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 header {
+  grid-area: main;
+  width: 100%;
+  z-index: 2;
+  right: 0;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: end;
+  position: fixed;
+  height: fit-content;
+  pointer-events: none;
 }
 
 nav {
+  pointer-events: all;
+  right: 0;
   background-color: var(--color-bg-main);
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 20%, rgba(94, 94, 94, 0.1), rgba(105, 105, 105, 0.062), rgba(110, 110, 110, 0.1),rgba(255, 255, 255, 0) 80%);
   background-blend-mode: multiply;
   max-width: var(--bp-2xl);
-  margin: 0 auto;
-
+  transition: transform .25s ease-in-out;
+  overflow-x: visible;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-inner);
+  padding-left: var(--font-size-sm);
   & ul {
-    margin: 0 auto;
+    right: 0;
     width: fit-content;
+    height: fit-content;
+    gap: var(--font-size-lg);
+    margin: var(--font-size-lg) var(--font-size-lg) var(--font-size-lg) 0;
+    padding: var(--font-size-6xl) 0 0;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
-    gap: 32px;
-    list-style-type: circle;
+    text-align: right;
   }
   & li {
-    padding: 1rem 0;
+    outline: 4px ridge rgba(79, 20, 109, 0.208);
+    box-shadow: var(--shadow-xl);
+    padding: 0 var(--font-size-sm);
+    border-radius: var(--border-radius-md);
+    background-color: hsla(246, 47%, 35%, 0.215);
+    list-style-type: none;
+    list-style-image: none;
+    transition: transform .3s ease-out;
+    padding-left: var(--font-size-2xl);
   }
 
+  & a {
+    display: flex;
+  }
+
+  & li:active {
+    transform: translateY(2px) translateX(1px);
+    background-color: var(--color-bg-card);
+    color: var(--color-secondary);
+  }
+
+  & li.current {
+    list-style-type: circle;
+    list-style-position: outside;
+    list-style-image: radial-gradient(circle, var(--color-accent), transparent);
+    transform: translateX(20px);
+  }
+}
+
+nav.contracted {
+  transform: translateY(-480px);
+  position: static;
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
+  grid-area: footer;
+  align-self: last baseline;
   width: 100%;
 }
 
@@ -256,7 +323,22 @@ button:focus-visible {
     --color-bg-card: #1e1c28;
     --color-border-default: #050a0a;
     --color-button-default: rgb(81, 11, 37);
-    
   }
 }
 
+@media (prefers-color-scheme: light) {
+  [data-theme="light"] {
+    --color-primary: rgb(106, 47, 190);
+    --color-secondary: rgb(90, 227, 56);
+    --color-accent: rgb(143, 235, 235);
+    --color-text-default: rgba(255, 255, 255, 0.87);
+    --color-text-lt: rgb(105, 47, 64);
+    --color-bg-body: #cae8ef;
+    --color-bg-main: rgb(242, 242, 240);
+    --color-bg-card: #f4faf7;
+    --color-border-default: #eae6e8;
+    --color-error: #f02d5e;
+    --color-success: #39a728;
+    --color-warning: #ecde43;
+  }
+}
