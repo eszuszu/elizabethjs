@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="icon" type="image/svg+xml" href="/cocentric.svg" />
+  <link rel="stylesheet" href="/style.css" />
+  <title>case studies | elizabethjs</title>
+  <script>(() => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        document.documentElement.dataset.theme = savedTheme;
+      }
+    })()</script>
+</head>
+
+<body>
+  <app- id="app">
+    <header slot="header">
+      <nav class="contracted">
+        <ul>
+          <li><a href="/about/">about</a></li>
+          <li class="current"><a href="/case-studies/">case studies</a></li>
+          <li><a href="/contact/">contact</a></li>
+          <li><a href="/blog/">blog</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="nav-toggle">⇣nav</button>
+      <button type="button" class="theme-toggle">🔆</button>
+    </header>
+    <main slot="page">
+      <!--__CONTENT_MARKER__-->
+    </main>
+    <footer slot="footer">
+      <p>2025 | <a href="/">Elizabeth Schwartz</a></p>
+    </footer>
+  </app->
+
+  <script type="module" src="../main.ts"></script>
+</body>
+
+</html>
