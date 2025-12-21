@@ -6,6 +6,7 @@ import util from 'node:util';
 import { EOL } from 'node:os';
 import { marked } from "marked";
 
+/* This script module illustrates transforming markdown into html via streams of Uint8Array buffers */
 
 const fsPromises = fs.promises;
 const pipeline = util.promisify(stream.pipeline);
@@ -30,11 +31,15 @@ async function walkAsync(dir: string): Promise<string[]> {
   }
 }
 
-async function* transformMarkdown(files: string[]) {
+async function* transformMarkdown(files: string[], encoder: TextEncoder, decoder: TextDecoder) {
   for (const file of files) {
     try {
-      const raw = await fsPromises.readFile(file, 'utf-8');
-      yield marked.parse(raw) + EOL; 
+
+      const rawBuffer = await fsPromises.readFile(file);
+      const markdownString = decoder.decode(rawBuffer);
+      const htmlString = marked.parse(markdownString);
+      yield encoder.encode(htmlString + EOL); 
+
     } catch (error) {
       console.error(`Skipping file due to read error: ${file}`, error);
     }
@@ -50,18 +55,22 @@ async function writeToStream(readable: stream.Readable, filePath: PathLike) {
 
 }
 
-async function composePageHTML(templateFile: PathLike, markdownSource: string[], outDir: PathLike) {
-  const template = await fsPromises.readFile(templateFile, 'utf-8');
-  const [header, footer] = template.split('<!--__CONTENT_MARKER__-->');
-
+async function composePageHTML(templateFile: PathLike, markdownSource: string[], outPath: PathLike) {
+  const templateBuffer = await fsPromises.readFile(templateFile);
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+  const templateString = decoder.decode(templateBuffer);
+  const [header, footer] = templateString.split('<!--__CONTENT_MARKER__-->');
+  
+  //this master generator yields streams of Uint8Array TypedArrays, encoders keep the pipeline binary first
   async function* pageAssembler() {
-    yield header + EOL;
-    yield* transformMarkdown(markdownSource);
-    yield footer;
+    yield encoder.encode(header + EOL);
+    yield* transformMarkdown(markdownSource, encoder, decoder);
+    yield encoder.encode(footer);
   }
 
-  const readableStream = stream.Readable.from(pageAssembler(), {encoding: 'utf8'});
-  await writeToStream(readableStream, outDir)
+  const readableStream = stream.Readable.from(pageAssembler());
+  await writeToStream(readableStream, outPath)
 }
 
 async function main() {
@@ -74,7 +83,7 @@ async function main() {
     console.log(`Succesfully compiled ${filesToTransform.length} files to ${outPath}`);
 
   } catch (error) {
-    console.error("An error occured dcuring main process:", error);
+    console.error("An error occured during main process:", error);
     process.exit(1);
   }
 }
