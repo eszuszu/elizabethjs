@@ -24,6 +24,7 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
             blog: resolve(__dirname, 'src/blog/index.html'),
             case_studies: resolve(__dirname, 'src/case-studies/index.html'),
             contact: resolve(__dirname, 'src/contact/index.html'),
+            notFound: resolve(__dirname, 'src/404.html')
           },
           
         }
