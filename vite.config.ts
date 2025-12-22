@@ -1,9 +1,12 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import { resolve } from "node:path";
 
+
 export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+
   if (command === 'serve' && !isPreview) {
-   
+    
     return {
       root: resolve(__dirname, 'src'),
     }
