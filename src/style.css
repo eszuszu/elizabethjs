@@ -132,6 +132,36 @@ hgroup span {
   left: 64px;
   pointer-events: all;
 }
+.email-btn {
+  font-size: var(--font-size-4xl);
+  display: flex;
+  margin: var(--font-size-2xl);
+  flex-flow: column;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(137, 43, 226, 0.187);
+  background-blend-mode: multiply;
+  padding: 0;
+}
+.copied {
+  background-color: rgba(13, 4, 38, 0.751);
+  background-blend-mode: multiply;
+  padding: 0;
+  transform: translateZ(30px);
+  transition: all cubic-bezier(0.455, 0.03, 0.515, 0.955) .4s;
+}
+.copied span:not(.micro) {
+  transform: rotate(720deg);
+  transition:cubic-bezier(0.55, 0.055, 0.675, 0.19) .2s;
+
+}
+.micro {
+  display: block;
+  width: 96px;
+  padding: var(--font-size-sm);
+  font-size: var(--font-size-xs);
+}
+
 
 a {
   font-weight: 500;

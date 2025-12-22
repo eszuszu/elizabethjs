@@ -6,6 +6,7 @@ import './style.css';
   class App extends HTMLElement {
     themeToggle: HTMLButtonElement | null = null;
     navToggle: HTMLButtonElement | null = null;
+    emailButton: HTMLButtonElement | null = null;
     navIsExpanded: boolean = false;
     currentTheme: theme  = localStorage.getItem('theme') as theme;
     template = () =>
@@ -31,6 +32,7 @@ import './style.css';
       }
       this.themeToggle = this.querySelector('.theme-toggle');
       this.navToggle = this.querySelector('.nav-toggle');
+      this.emailButton = this.querySelector('.email-btn');
 
       console.log(this.themeToggle);
       if (this.themeToggle !== null) {
@@ -40,6 +42,10 @@ import './style.css';
       if (this.navToggle !== null) {
         this.navToggle?.addEventListener('click', this.handleNavToggle);
       }
+      if (this.emailButton ?? null) {
+        this.emailButton?.addEventListener('click', this.handleClipBoardEvent);
+      }
+
     }
 
     adoptedCallback() {
@@ -49,7 +55,9 @@ import './style.css';
     }
 
     disconnectedCallback() {
-      this.themeToggle?.removeEventListener('click', this.handleThemeToggle)
+      this.themeToggle?.removeEventListener('click', this.handleThemeToggle);
+      this.navToggle?.removeEventListener('click', this.handleNavToggle);
+      this.emailButton?.removeEventListener('click', this.handleClipBoardEvent);
       console.log('app custom element removed from dom');
     }
 
@@ -90,6 +98,22 @@ import './style.css';
       nav.classList.toggle('contracted');
       this.navIsExpanded ? this.navIsExpanded = true : this.navIsExpanded = false;
       
+    }
+
+    async writeToClipBoard(text: string) {
+      try {
+        await navigator.clipboard.writeText(text);
+        console.log(text);
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    handleClipBoardEvent = () => {
+      this.writeToClipBoard(import.meta.env.VITE_EMAIL);
+      this.emailButton?.classList.add('copied');
+      const textNode = this.emailButton?.querySelector('.micro');
+      textNode!.textContent = 'copied email to clipboard';
     }
 
   }
