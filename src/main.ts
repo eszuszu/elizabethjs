@@ -90,7 +90,7 @@ import './style.css';
         localStorage.setItem('theme', 'dark');
         this.currentTheme = 'dark';
       }
-      console.log(`${this.currentTheme}`);
+      //console.log(`${this.currentTheme}`);
     }
 
     handleNavToggle = () => {
@@ -103,9 +103,9 @@ import './style.css';
     async writeToClipBoard(text: string) {
       try {
         await navigator.clipboard.writeText(text);
-        console.log(text);
+        //console.log(text);
       } catch (error) {
-        console.error(error)
+        //console.error(error)
       }
     }
 
